@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
-import SearchBox from './components/SearchBox';
-import LyricsBox from './components/LyricsBox';
+import App from '../src/App';
 
 ReactDOM.render(
   <div className="container">
-    <SearchBox>
-      <div type="text"></div>
-    </SearchBox>
-    <LyricsBox />
+    <App />
   </div>,
   document.getElementById('root')
 );
-
-serviceWorker.unregister();
