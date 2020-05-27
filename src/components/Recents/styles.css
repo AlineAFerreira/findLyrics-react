@@ -24,7 +24,7 @@
 .box-recents .recents-content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .box-recents .item {
