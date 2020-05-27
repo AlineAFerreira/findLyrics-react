@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './styles.css';
 
 const Results = (props) => {  
 
   function suggestions() {
     return props.results.map(item => {
-      console.log(item)
       return (
         <div className="results-item" key={item.id} onClick={()=> props.lyricsParams(item.id, item.artist, item.song, item.cover)}>
           <div className="box-img">

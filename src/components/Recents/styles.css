@@ -61,3 +61,11 @@
     font-size: 12px;
 }
 
+.box-noRecents {
+    padding: 0 30px;
+    margin: 0 auto;
+}
+
+.box-noRecents img {
+    width: 100%;
+}

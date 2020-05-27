@@ -12,11 +12,17 @@ aside {
 h1 {
     text-transform: uppercase;
     color: #7ECDDF;
+    font-size: 40px;
+    margin: 0 0 10px;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 h2 {
     font-weight: lighter;
     font-size: 28px;
+    margin: 0;
+    line-height: 1.2;
 }
 
 @media (min-width: 768px) {
@@ -34,9 +40,5 @@ h2 {
 
     aside * {
         color: #FFF;
-    }
-
-    h2 {
-        font-size: 32px;
     }
 }
