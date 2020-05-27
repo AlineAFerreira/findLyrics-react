@@ -1,0 +1,42 @@
+aside {
+    padding: 0 20px; 
+    margin-top: 25px;   
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1 {
+    text-transform: uppercase;
+    color: #7ECDDF;
+}
+
+h2 {
+    font-weight: lighter;
+    font-size: 28px;
+}
+
+@media (min-width: 768px) {
+    aside {
+        width: 40%;
+        height: 100%;        
+        
+        background: #7ECDDF;
+        margin-top: 0; 
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    aside * {
+        color: #FFF;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+}

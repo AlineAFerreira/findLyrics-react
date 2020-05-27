@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Container } from './styles';
+import './styles.css';
 
 const Recents = (props) => {
 
@@ -15,10 +15,10 @@ const Recents = (props) => {
     if (values !== null) {
       return values.map(item => {
         return (
-          <div key={item.id}>
-            <img src={item.cover} alt={item.album}/> <br/>
-            <span>{item.song}</span> <br/>
-            <span>{item.artist}</span> <br/>
+          <div className="item" key={item.id} onClick={()=> props.lyricsParams(item.id, item.artist, item.song, item.cover)}>
+            <img src={item.cover} alt=""/>
+            <span className="song-name">{item.song}</span>
+            <span className="artist-name">{item.artist}</span>
           </div>  
         )
       });
@@ -28,12 +28,12 @@ const Recents = (props) => {
   }
 
   return (
-    <React.Fragment>
-      <div>Recentes: </div>
-      <div style={{display: 'flex'}}>
+    <div className="box-recents">
+      <h1>Recent Searches: </h1>
+      <div className="recents-content">
         {getRecents()}
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

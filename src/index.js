@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../src/App';
+import './styles.css';
 
 ReactDOM.render(
-  <div className="container">
-    <App />
-  </div>,
+  <App />,
   document.getElementById('root')
 );
