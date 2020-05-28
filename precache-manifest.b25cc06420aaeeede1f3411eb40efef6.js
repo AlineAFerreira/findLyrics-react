@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2a900699756ccd48e92f5b5bb844d16e",
+    "revision": "f5096c5106ba801fb1e361164a1b3aca",
     "url": "/findLyrics-react/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/findLyrics-react/static/js/2.050a0937.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4f22dd8b7b3e73899148",
-    "url": "/findLyrics-react/static/js/main.6d688523.chunk.js"
+    "revision": "edadf1ce42ca6f5fdd08",
+    "url": "/findLyrics-react/static/js/main.c5e11196.chunk.js"
   },
   {
     "revision": "20c99a381a836d10d7cf",
