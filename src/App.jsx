@@ -57,7 +57,7 @@ const App = () => {
       }       
     })
     .catch(error => {
-      toast.error('No lyrics found', {autoClose: false,});
+      toast.error('No lyrics found');
     });
     setShowLoading(false);
   }
