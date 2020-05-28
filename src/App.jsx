@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import axios from 'axios';
+import GlobalStyle from './styles';
 import AsideContainer from './components/AsideContainer';
 import Loading from './components/Loading';
 import Search from './components/Search';
@@ -6,6 +8,8 @@ import Recents from './components/Recents';
 import Results from './components/Results';
 import Lyrics from './components/Lyrics';
 import Footer from './components/Footer';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
 
 
 const App = () => {
@@ -42,19 +46,20 @@ const App = () => {
   const findLyrics = (id, artist, song, cover) => {
     const urlEnc = encodeURI(`https://api.lyrics.ovh/v1/${artist}/${song}`);
     setShowLoading(true);
-    fetch(urlEnc)
-    .then(res => res.json())
-    .then(data => {
-      if (data.lyrics) {
-        setShowLyrics([song, artist, data.lyrics]);        
+    axios
+    .get(urlEnc)
+    .then(res => {
+      if (res.data.lyrics) {
+        setShowLyrics([song, artist, res.data.lyrics]);        
         setShowRecents(false);
         setShowResults(false);
         storeData(id, artist, song, cover);
-      } else if (data.error) {
-        alert(data.error)
-      }
-      setShowLoading(false);
+      }       
     })
+    .catch(error => {
+      toast.error('No lyrics found', {autoClose: false,});
+    });
+    setShowLoading(false);
   }
 
   //Set data on 'LocalStorage'
@@ -78,14 +83,16 @@ const App = () => {
     localStorage.setItem('lastSearches', JSON.stringify(lastSearch))
     setRecents(lastSearch);
   }
+ 
 
   return (
     <>
+      <GlobalStyle />
       <AsideContainer />
-      <div className="main">        
+      <div className="main">   
+        <ToastContainer />
         <Search setResults={refreshResults} controlPage={displayResults} refreshLoading={refreshLoading} />
         <div className="content">
-
           { showLoading &&
             <Loading newClass={showLoading}/>
           }

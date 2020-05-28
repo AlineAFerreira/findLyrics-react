@@ -1,10 +1,9 @@
 import React from 'react';
-
-import './styles.css';
+import {BoxLoading} from './styles';
 
 const Loading = (props) => {
   return (
-      <div className="loading"></div>
+      <BoxLoading />
   );
 }
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './styles.css';
+import {BoxRecents, TitleRecents, RecentsContent, RecentsItem, Song, Artist, BoxNoRecents} from './styles';
 import Image from './../../assets/images/4.png';
 
 const Recents = (props) => {
@@ -11,33 +11,33 @@ const Recents = (props) => {
     } else {
       values = props.recents;
     }
-    console.log(values)
+
     if (values !== null) {      
       return values.map(item => {
         return (
-          <div className="item" key={item.id} onClick={()=> props.lyricsParams(item.id, item.artist, item.song, item.cover)}>
+          <RecentsItem key={item.id} onClick={()=> props.lyricsParams(item.id, item.artist, item.song, item.cover)}>
             <img src={item.cover} alt=""/>
-            <span className="song-name">{item.song}</span>
-            <span className="artist-name">{item.artist}</span>
-          </div>  
+            <Song>{item.song}</Song>
+            <Artist>{item.artist}</Artist>
+          </RecentsItem>  
         )
       });      
     } else {
       return (
-        <div className="box-noRecents">
+        <BoxNoRecents>
           <img src={Image} alt="website logo" />
-        </div>
+        </BoxNoRecents>
       );
     }
   }
 
   return (
-    <div className="box-recents">
-      <h1>Recent Searches:</h1>
-      <div className="recents-content">
+    <BoxRecents>
+      <TitleRecents>Recent Searches:</TitleRecents>
+      <RecentsContent>
         {getRecents()}
-      </div>
-    </div>
+      </RecentsContent>
+    </BoxRecents>
   );
 }
 

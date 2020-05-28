@@ -1,16 +1,16 @@
 import React from "react";
-import './styles.css';
+import {Artist, Song, BoxLyrics, BackButton} from './styles';
 
 export default (props) => {
   return (
     <div>
-      <button onClick={() => {props.controlPage(true)}}>Voltar</button>
+      <BackButton onClick={() => {props.controlPage(true)}}>Voltar</BackButton>
       <div>
-        <span className="artist">{props.artist}</span>
-        <span className="song">{props.song}</span> 
-        <pre>{props.lyrics}</pre>
+        <Artist>{props.artist}</Artist>
+        <Song>{props.song}</Song> 
+        <BoxLyrics>{props.lyrics}</BoxLyrics>
       </div>
-      <button onClick={() => {props.controlPage(true)}}>Voltar</button>
+      <BackButton onClick={() => {props.controlPage(true)}}>Voltar</BackButton>
     </div>
   )
 };

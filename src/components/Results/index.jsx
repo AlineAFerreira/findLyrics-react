@@ -1,29 +1,29 @@
 import React from 'react';
-import './styles.css';
+import {BoxResults, TitleResults, ResultsItem, BoxImg, SongInfo} from './styles';
 
 const Results = (props) => {  
 
   function suggestions() {
     return props.results.map(item => {
       return (
-        <div className="results-item" key={item.id} onClick={()=> props.lyricsParams(item.id, item.artist, item.song, item.cover)}>
-          <div className="box-img">
+        <ResultsItem key={item.id} onClick={()=> props.lyricsParams(item.id, item.artist, item.song, item.cover)}>
+          <BoxImg>
             <img src={item.artistPicture} alt={item.artist} />
-          </div>
-          <div className="song-info">
+          </BoxImg>
+          <SongInfo>
             <span className="song-name">{item.song}</span>
             <span className="artist-name">{item.artist} - {item.album}</span>
-          </div>
-        </div>  
+          </SongInfo>
+        </ResultsItem>  
       )
     });
   }
 
   return (
-    <div className="box-results">      
-      <h1>Results: </h1>
+    <BoxResults>      
+      <TitleResults>Results: </TitleResults>
       {suggestions()}
-    </div>
+    </BoxResults>
   );
 }
 

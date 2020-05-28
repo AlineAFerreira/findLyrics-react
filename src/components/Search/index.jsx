@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './styles.css';
+import {BoxSearch, InputSearch, TextAlert} from './styles';
+import axios from 'axios';
 
 const Search = (props) => {
   const [noResults, setNoResults] = useState(false);
@@ -12,11 +13,12 @@ const Search = (props) => {
       let temp = [];
       props.refreshLoading(true);
 
-      fetch(`https://api.lyrics.ovh/suggest/${enc}`)
-      .then(result => {return result.json()})
-      .then(data => {
-        if(data.data.length){
-          data.data.forEach((item, index) => {
+      axios
+      .get(`https://api.lyrics.ovh/suggest/${enc}`)
+      .then(res => {
+        const result = res.data.data;
+        if(result.length) {
+          result.forEach((item, index) => {
             temp.push({
               id: item.id,
               song: item.title,
@@ -34,7 +36,7 @@ const Search = (props) => {
           props.controlPage(true);
         }
         props.refreshLoading(false);
-      });
+      })
     } else {
       props.setResults([]);
       props.controlPage(true);
@@ -42,10 +44,10 @@ const Search = (props) => {
   }
 
   return (
-    <div className="box-search">
-      <input type="text" placeholder="Type here..." onChange={handlerChangeSearch}/>  
-      <span className={`no-results ${noResults ? 'visible' : ''}`}> No lyrics found</span>
-    </div>
+    <BoxSearch>
+      <InputSearch type="text" placeholder="Type here..." onChange={handlerChangeSearch}/>  
+      <TextAlert className={`no-results ${noResults ? 'visible' : ''}`}> No lyrics found</TextAlert>
+    </BoxSearch>
   );
 }
 
