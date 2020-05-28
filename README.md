@@ -2,9 +2,9 @@
     <img alt="Find Lyrics" src=".github/findLyrics.png">
 </h1>
 
-<h4 align="center">
-  Find Lyrics with React Js.
-</h4>
+<h3 align="center">
+  Find Lyrics developed with React: <a href="https://alineaferreira.github.io/findLyrics-react/" target="_blank">Live Demo</a>
+</h3>
 
 
 ## Technologies
