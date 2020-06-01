@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Find Lyrics developed with React: <a href="https://alineaferreira.github.io/findLyrics-react/" target="_blank">Live Demo</a>
+  Find Lyrics developed with React e Redux: <a href="https://alineaferreira.github.io/findLyrics-react/" target="_blank">Live Demo</a>
 </h3>
 
 
@@ -12,6 +12,7 @@
 This project was developed with the following technologies:
 
 -  [React Js](https://reactjs.org/)
+-  [Redux](https://redux.js.org/)
 -  [Styled-components](https://www.styled-components.com/)
 -  [react-icons](https://react-icons.github.io/react-icons/)
 -  [Axios](https://github.com/axios/axios)
