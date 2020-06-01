@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/findLyrics-react/static/js/main.c5e11196.chunk.js",
-    "main.js.map": "/findLyrics-react/static/js/main.c5e11196.chunk.js.map",
+    "main.js": "/findLyrics-react/static/js/main.f87d4422.chunk.js",
+    "main.js.map": "/findLyrics-react/static/js/main.f87d4422.chunk.js.map",
     "runtime-main.js": "/findLyrics-react/static/js/runtime-main.e387c4bf.js",
     "runtime-main.js.map": "/findLyrics-react/static/js/runtime-main.e387c4bf.js.map",
     "static/css/2.3a221eca.chunk.css": "/findLyrics-react/static/css/2.3a221eca.chunk.css",
-    "static/js/2.050a0937.chunk.js": "/findLyrics-react/static/js/2.050a0937.chunk.js",
-    "static/js/2.050a0937.chunk.js.map": "/findLyrics-react/static/js/2.050a0937.chunk.js.map",
+    "static/js/2.92f49ad1.chunk.js": "/findLyrics-react/static/js/2.92f49ad1.chunk.js",
+    "static/js/2.92f49ad1.chunk.js.map": "/findLyrics-react/static/js/2.92f49ad1.chunk.js.map",
     "index.html": "/findLyrics-react/index.html",
-    "precache-manifest.b25cc06420aaeeede1f3411eb40efef6.js": "/findLyrics-react/precache-manifest.b25cc06420aaeeede1f3411eb40efef6.js",
+    "precache-manifest.8f1c2562e443992e047b556f97e44794.js": "/findLyrics-react/precache-manifest.8f1c2562e443992e047b556f97e44794.js",
     "service-worker.js": "/findLyrics-react/service-worker.js",
     "static/css/2.3a221eca.chunk.css.map": "/findLyrics-react/static/css/2.3a221eca.chunk.css.map",
-    "static/js/2.050a0937.chunk.js.LICENSE.txt": "/findLyrics-react/static/js/2.050a0937.chunk.js.LICENSE.txt",
+    "static/js/2.92f49ad1.chunk.js.LICENSE.txt": "/findLyrics-react/static/js/2.92f49ad1.chunk.js.LICENSE.txt",
     "static/media/4.png": "/findLyrics-react/static/media/4.3b427476.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e387c4bf.js",
     "static/css/2.3a221eca.chunk.css",
-    "static/js/2.050a0937.chunk.js",
-    "static/js/main.c5e11196.chunk.js"
+    "static/js/2.92f49ad1.chunk.js",
+    "static/js/main.f87d4422.chunk.js"
   ]
 }
