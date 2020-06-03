@@ -25,7 +25,7 @@ export default createGlobalStyle`
 
   .content {
     flex: 1;
-    padding: 20px 50px;
+    padding: 20px 15px;
     position: relative;
   }
 
@@ -50,6 +50,10 @@ export default createGlobalStyle`
   @media (min-width: 768px) {
     body {
       margin-left: 40%;
+    }
+
+    .content {
+      padding: 20px 50px;
     }
   }
 `;

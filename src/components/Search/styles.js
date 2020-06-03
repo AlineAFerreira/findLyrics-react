@@ -3,7 +3,11 @@ import styled from 'styled-components';
 export const BoxSearch = styled.div`
   position: relative;
   margin-bottom: 30px;
-  margin: 30px 50px 0px;
+  margin: 30px 15px 0px;
+
+  @media (min-width: 768px) {
+    margin: 30px 50px 0px;
+  }
 `;
 
 export const InputSearch = styled.input`

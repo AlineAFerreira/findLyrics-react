@@ -29,10 +29,20 @@ export const RecentsContent = styled.div`
 `;
 
 export const RecentsItem = styled.div`
-  max-width: 140px;
+  width: 33%;
   cursor: pointer;
   text-align: center;
-  margin: 0 10px 20px;
+  padding: 0 10px 20px;
+
+  @media (min-width: 992px) {
+    max-width: 140px;
+  }
+
+  @media screen and (max-width: 450px),
+	(min-width: 768px) and (max-width: 866px) {
+		width: 50%
+  }
+
 
   &:hover img {
     transform: scale(1.1);

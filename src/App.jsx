@@ -1,4 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
+import { 
+  refreshLoading, 
+  refreshResults,
+  refreshNoResults,
+  showRecents,
+  showLyrics, 
+} from './store/actions';
 import axios from 'axios';
 import GlobalStyle from './styles';
 import AsideContainer from './components/AsideContainer';
@@ -12,54 +20,64 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'; 
 
 
-const App = () => {
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const [results, setResults] = useState([]);
-  const [recents, setRecents] = useState([]);
-  const [showLyrics, setShowLyrics] = useState([]);
-  const [showLoading, setShowLoading] = useState(false);
-  const [showRecents, setShowRecents] = useState(true);
-  const [showResults, setShowResults] = useState(false);
+const App = (props) => {
 
-  const refreshLyricsParams = (id, artist, song, cover) => {
-    findLyrics(id, artist, song, cover);
-  }
+  const handlerChangeSearch = value => {
+    props.refreshLyrics([]);
 
-  const refreshFirstLoad = (data) => {
-    setIsFirstLoad(data);
-  }
-
-  const refreshLoading = (data) => {
-    setShowLoading(data);
-  }
-
-  const refreshResults = (data) => {
-    setResults(data);
-  }
-
-  const displayResults = (data) => {
-    setShowRecents(data);
-    setShowResults(!data);
-    setShowLyrics([]);
+    if (value.length >= 3) {
+      const enc = encodeURI(value);
+      let temp = [];
+      props.refreshLoading(true);
+      props.setShowRecents(false);
+      
+      axios
+      .get(`https://api.lyrics.ovh/suggest/${enc}`)
+      .then(res => {
+        const result = res.data.data;
+        if(result.length) {
+          result.forEach((item, index) => {
+            temp.push({
+              id: item.id,
+              song: item.title,
+              artist: item.artist.name,
+              artistPicture: item.artist.picture,
+              album: item.album.title,
+              cover: item.album.cover
+            });
+          });
+          props.refreshResults(temp);
+        } else {
+          props.refreshResults([]);
+          props.setShowRecents(true);
+          props.setNoResults(true);
+        }
+        props.refreshLoading(false);
+      })
+    } else {
+      props.refreshResults([]);
+      props.setShowRecents(true);
+      props.setNoResults(false);
+    }
   }
 
   const findLyrics = (id, artist, song, cover) => {
     const urlEnc = encodeURI(`https://api.lyrics.ovh/v1/${artist}/${song}`);
-    setShowLoading(true);
+    props.refreshLoading(true);
     axios
     .get(urlEnc)
     .then(res => {
       if (res.data.lyrics) {
-        setShowLyrics([song, artist, res.data.lyrics]);        
-        setShowRecents(false);
-        setShowResults(false);
+        props.refreshLyrics([song, artist, res.data.lyrics]);        
+        props.setShowRecents(false);
+        props.refreshResults([]);
         storeData(id, artist, song, cover);
       }       
     })
     .catch(error => {
       toast.error('No lyrics found');
     });
-    setShowLoading(false);
+    props.refreshLoading(false);
   }
 
   //Set data on 'LocalStorage'
@@ -81,32 +99,31 @@ const App = () => {
     }
     if(!isOnRecents) lastSearch.push(crtSearch);
     localStorage.setItem('lastSearches', JSON.stringify(lastSearch))
-    setRecents(lastSearch);
+    // setRecents(lastSearch);
   }
  
-
   return (
     <>
       <GlobalStyle />
       <AsideContainer />
       <div className="main">   
         <ToastContainer />
-        <Search setResults={refreshResults} controlPage={displayResults} refreshLoading={refreshLoading} />
+        <Search handlerChangeSearch={handlerChangeSearch} noResults={props.noResults} />
         <div className="content">
-          { showLoading &&
-            <Loading newClass={showLoading}/>
+          {props.loading &&
+            <Loading/>
           }
 
-          {showResults &&
-            <Results results={results} setIsFirstLoad={refreshFirstLoad} lyricsParams={refreshLyricsParams} />
+          {props.results.length > 0 &&
+            <Results lyricsParams={findLyrics} />
           }
 
-          { showLyrics.length > 0 &&
-            <Lyrics song={showLyrics[0]} artist={showLyrics[1]} lyrics={showLyrics[2]} controlPage={displayResults}/>
+          {props.lyrics.length > 0 &&
+            <Lyrics song={props.lyrics[0]} artist={props.lyrics[1]} lyrics={props.lyrics[2]} controlPage={props.displayResults}/>
           }
 
-          {showRecents &&
-            <Recents recents={recents} isFirstLoad={isFirstLoad} lyricsParams={refreshLyricsParams} />
+          {props.showRecents &&
+            <Recents lyricsParams={findLyrics} />
           }
         </div>
         <Footer />
@@ -115,4 +132,43 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state)=> {
+  return {
+    loading: state.lyrics.loading,
+    showRecents: state.lyrics.showRecents,
+    lyrics: state.lyrics.lyrics,
+    noResults: state.lyrics.noResults,
+    results: state.lyrics.results
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      refreshLoading: bool => {
+        dispatch(refreshLoading(bool));
+      },
+      refreshResults: array => {
+          dispatch(refreshResults(array))
+      }, 
+      setNoResults: array => {
+        dispatch(refreshNoResults(array))
+      },     
+      refreshLyrics: array => {
+        dispatch(showLyrics(array))
+      },
+      displayResults: data => {
+        dispatch(showRecents(data))
+        dispatch(refreshResults([]))
+        dispatch(showLyrics([]))
+      },
+      setShowRecents: data => {
+        dispatch(showRecents(data))
+      }
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

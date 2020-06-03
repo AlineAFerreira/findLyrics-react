@@ -31,6 +31,7 @@ export const ResultsItem = styled.div`
 `;
 
 export const BoxImg = styled.div`
+  min-width: 50px;
   width: 50px;
   height: 50px;
   background: #c1c1c1;
@@ -42,13 +43,16 @@ export const BoxImg = styled.div`
 
 export const SongInfo = styled.div`
   margin-left: 15px;
+  overflow: hidden;
 
   .song-name {
-    display: block;
     color: black;
     text-transform: uppercase;
-    line-height: 10px;
-    letter-spacing: 0.5px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .artist-name {

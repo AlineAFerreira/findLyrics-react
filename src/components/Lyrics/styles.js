@@ -47,6 +47,7 @@ export const BackButton = styled.button`
   background-color: #7ecddf;
   text-transform: uppercase;
   color: #FFF;
+  cursor: pointer;
 
   &:hover {
     background-color: #48c4e0;

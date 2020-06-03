@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {BoxResults, TitleResults, ResultsItem, BoxImg, SongInfo} from './styles';
 
 const Results = (props) => {  
@@ -11,8 +12,8 @@ const Results = (props) => {
             <img src={item.artistPicture} alt={item.artist} />
           </BoxImg>
           <SongInfo>
-            <span className="song-name">{item.song}</span>
-            <span className="artist-name">{item.artist} - {item.album}</span>
+            <div className="song-name">{item.song}</div>
+            <div className="artist-name">{item.artist} - {item.album}</div>
           </SongInfo>
         </ResultsItem>  
       )
@@ -26,5 +27,13 @@ const Results = (props) => {
     </BoxResults>
   );
 }
+const mapStateToProps = (state)=> {
+  return {
+    results: state.lyrics.results,
 
-export default Results;
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(Results);
