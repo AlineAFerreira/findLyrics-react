@@ -25,6 +25,29 @@ export const InputSearch = styled.input`
   }
 `;
 
+export const ButtonSearch = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active svg {
+    color: #999;
+  }
+
+  svg {
+    color: #707070;
+  }
+`;
+
 export const TextAlert = styled.span`
   font-size: 12px;
   margin-left: 25px;

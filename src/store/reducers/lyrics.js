@@ -1,7 +1,8 @@
-import { UPDATE_LOADING,UPDATE_RECENTS_VISIBILITY, UPDATE_LYRICS_VISIBILITY, UPDATE_RESULTS, UPDATE_NO_RESULTS } from './../types/lyrics';
+import { UPDATE_LOADING, UPDATE_SEARCH_VALUE, UPDATE_RECENTS_VISIBILITY, UPDATE_LYRICS_VISIBILITY, UPDATE_RESULTS, UPDATE_NO_RESULTS } from './../types/lyrics';
 
 const INITIAL_STATE = {
     isFirstLoad: true,
+    searchValue: '',
     results: [],
     noResults: false,
     recents: [],
@@ -18,6 +19,11 @@ export default function(state = INITIAL_STATE, action){
             return {
                 ...state,
                 loading: action.payload
+            }
+        case UPDATE_SEARCH_VALUE:
+            return {
+                ...state,
+                searchValue: action.payload
             }
         case UPDATE_RESULTS:
             return {

@@ -2,13 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { 
   refreshLoading, 
+  updateSearchValue,
   refreshResults,
   refreshNoResults,
   showRecents,
   showLyrics, 
-} from './store/actions';
-import axios from 'axios';
+} from './store/actions/lyrics';
 import GlobalStyle from './styles';
+import { lyricsService } from './services/lyrics';
 import AsideContainer from './components/AsideContainer';
 import Loading from './components/Loading';
 import Search from './components/Search';
@@ -21,8 +22,14 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 
 const App = (props) => {
+  const keyHandler = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
 
-  const handlerChangeSearch = value => {
+  const handleSearch = () => {
+    const value = props.searchValue;
     props.refreshLyrics([]);
 
     if (value.length >= 3) {
@@ -31,10 +38,9 @@ const App = (props) => {
       props.refreshLoading(true);
       props.setShowRecents(false);
       
-      axios
-      .get(`https://api.lyrics.ovh/suggest/${enc}`)
-      .then(res => {
-        const result = res.data.data;
+      lyricsService.findLyrics(enc)
+      .then((res)=> {
+        const result = res.data;
         if(result.length) {
           result.forEach((item, index) => {
             temp.push({
@@ -64,8 +70,7 @@ const App = (props) => {
   const findLyrics = (id, artist, song, cover) => {
     const urlEnc = encodeURI(`https://api.lyrics.ovh/v1/${artist}/${song}`);
     props.refreshLoading(true);
-    axios
-    .get(urlEnc)
+    lyricsService.findLyric(urlEnc)
     .then(res => {
       if (res.data.lyrics) {
         props.refreshLyrics([song, artist, res.data.lyrics]);        
@@ -108,7 +113,7 @@ const App = (props) => {
       <AsideContainer />
       <div className="main">   
         <ToastContainer />
-        <Search handlerChangeSearch={handlerChangeSearch} noResults={props.noResults} />
+        <Search handleSearch={handleSearch} handleKeyUp={keyHandler} handleChange={props.updateSearchValue} noResults={props.noResults} />
         <div className="content">
           {props.loading &&
             <Loading/>
@@ -135,6 +140,7 @@ const App = (props) => {
 const mapStateToProps = (state)=> {
   return {
     loading: state.lyrics.loading,
+    searchValue: state.lyrics.searchValue,
     showRecents: state.lyrics.showRecents,
     lyrics: state.lyrics.lyrics,
     noResults: state.lyrics.noResults,
@@ -147,6 +153,9 @@ const mapDispatchToProps = dispatch => {
       refreshLoading: bool => {
         dispatch(refreshLoading(bool));
       },
+      updateSearchValue: value => {
+        dispatch(updateSearchValue(value));
+      },      
       refreshResults: array => {
           dispatch(refreshResults(array))
       }, 
