@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import { IoIosSearch } from 'react-icons/io';
 import {
   BoxSearch, 
@@ -26,13 +25,4 @@ const Search = (props) => {
   );
 }
 
-const mapStateToProps = (state)=> {
-  return {
-    searchValue: state.lyrics.searchValue,
-  }
-}
-
-
-export default connect(
-  mapStateToProps
-)(Search);
+export default Search;
